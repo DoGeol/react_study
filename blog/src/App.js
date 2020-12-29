@@ -9,6 +9,7 @@ function App() {
         2. 두번째 인자 : state 변경 함수
     */
     let [title, setTitle] = useState(['남자 코트 추천', '강남 고기 맛집', '글 제목 테스트01']);
+    let [clickTitle, setClickTitle] = useState(0);
     let [like, setLike] = useState(0);
     let changeTitle = () => {
         let titleArr = [...title];
@@ -22,16 +23,14 @@ function App() {
             <div className="black-nav">
                 <div>개발 블로그</div>
             </div>
-            <div className="list">
-                <h3> {title[0]} <span onClick={() => setLike(like++)}>👍</span> {like} </h3>
-                <p>2월 21일 발행</p>
-                <hr/>
-            </div>
             {
                 title.map((val, idx) => {
                     return (
                         <div className="list">
-                            <h3> {val} </h3>
+                            <h3 onClick={() => {
+                                setIsModal(!isModal);
+                                setClickTitle(idx);
+                            }}> {val} <span onClick={() => setLike(like++)}>👍</span> {like} </h3>
                             <p>2월 21일 발행</p>
                             <hr/>
                         </div>
@@ -50,7 +49,7 @@ function App() {
             </button>
             {
                 isModal
-                    ? <Modal modalTitle={title}/>
+                    ? <Modal modalTitle={title} modalTitleNum={clickTitle}/>
                     : null
             }
         </div>
@@ -61,7 +60,7 @@ function Modal(props) {
     console.log(props)
     return (
         <div className="modal">
-            <h2>{props.modalTitle[1]}</h2>
+            <h2>{props.modalTitle[props.modalTitleNum]}</h2>
             <p>날짜</p>
             <p>상세내용</p>
         </div>
