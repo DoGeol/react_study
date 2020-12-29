@@ -27,16 +27,17 @@ function App() {
                 <p>2월 21일 발행</p>
                 <hr/>
             </div>
-            <div className="list">
-                <h3> {title[1]} </h3>
-                <p>2월 20일 발행</p>
-                <hr/>
-            </div>
-            <div className="list">
-                <h3> {title[2]} </h3>
-                <p>2월 19일 발행</p>
-                <hr/>
-            </div>
+            {
+                title.map((val, idx) => {
+                    return (
+                        <div className="list">
+                            <h3> {val} </h3>
+                            <p>2월 21일 발행</p>
+                            <hr/>
+                        </div>
+                    )
+                })
+            }
             <button onClick={changeTitle}> 첫번재 글 제목 변경</button>
             <button onClick={() => {
                 // setIsModal(!modal);
