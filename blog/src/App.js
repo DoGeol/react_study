@@ -1,25 +1,19 @@
-import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
-          <p>
-            안녕하세요.
-          </p>
-          <a
-              className="App-link"
-              href="https://reactjs.org"
-              target="_blank"
-              rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-  );
+    let style_test = {
+        color: 'blue',
+        fontSize: '20px'
+    }
+    return (
+        <div className="App">
+            <div className="black-nav">
+                <div>개발 블로그</div>
+            </div>
+            <div style={{color: 'red'}}>맞아</div>
+            <div style={style_test}>아냐</div>
+        </div>
+    );
 }
 
 export default App;
