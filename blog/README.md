@@ -28,3 +28,27 @@
     <div style={ sytle_object }>스타일 입력</div>
     <div style={ {color : 'red', fontSize : '30px'} }>스타일 입력</div>
     ```
+
+## 2. 데이터 바인딩
+
+1. State
+   * 사용하는 이유
+      * React를 사용하여 웹 App 처럼 동작하게 하기 위함
+      * state는 변경되면 HTML일 재렌더링 되어짐
+   * 변수 대신에 쓰는 데이터 저장공간
+      * 자주 변경되는 데이터를 저장
+   * useState()를 사용하여 만듬
+   * 문자, 숫자, Array, Object 모두 저장 가능
+     ```
+     /* Destructuring 문법을 사용하여 useState에 담겨있는 변수를 a,b에 저장한다. */
+     /*
+         useState를 사용하면 배열을 리턴하게 되는데, 2개의 인자를 가짐
+         1. 첫번째 인자 : state 값
+         2. 두번째 인자 : state 변경 함수
+     */
+     import React, { useState } from 'react'
+     function test() {
+       let [a,b] = useState('text');
+     }
+     ```
+2. Props
