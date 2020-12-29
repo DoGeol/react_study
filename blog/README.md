@@ -32,23 +32,32 @@
 ## 2. 데이터 바인딩
 
 1. State
-   * 사용하는 이유
-      * React를 사용하여 웹 App 처럼 동작하게 하기 위함
-      * state는 변경되면 HTML일 재렌더링 되어짐
-   * 변수 대신에 쓰는 데이터 저장공간
-      * 자주 변경되는 데이터를 저장
-   * useState()를 사용하여 만듬
-   * 문자, 숫자, Array, Object 모두 저장 가능
-     ```
-     /* Destructuring 문법을 사용하여 useState에 담겨있는 변수를 a,b에 저장한다. */
-     /*
-         useState를 사용하면 배열을 리턴하게 되는데, 2개의 인자를 가짐
-         1. 첫번째 인자 : state 값
-         2. 두번째 인자 : state 변경 함수
-     */
-     import React, { useState } from 'react'
-     function test() {
-       let [a,b] = useState('text');
-     }
-     ```
+    * 사용하는 이유
+        * React를 사용하여 웹 App 처럼 동작하게 하기 위함
+        * state는 변경되면 HTML일 재렌더링 되어짐
+    * 변수 대신에 쓰는 데이터 저장공간
+        * 자주 변경되는 데이터를 저장
+    * useState()를 사용하여 만듬
+    * 문자, 숫자, Array, Object 모두 저장 가능
+      ```
+      /* Destructuring 문법을 사용하여 useState에 담겨있는 변수를 a,b에 저장한다. */
+      /*
+          useState를 사용하면 배열을 리턴하게 되는데, 2개의 인자를 가짐
+          1. 첫번째 인자 : state 값
+          2. 두번째 인자 : state 변경 함수
+      */
+      import React, { useState } from 'react'
+      function test() {
+        let [a,b] = useState('text');
+      }
+      ```
 2. Props
+
+## 3.Component
+
+* State로 상태 관리하면서 Props를 사용하여 각 컴포넌트간에 전달이 필요함
+* 컴포넌트로 만들기 좋은 것들
+    1. 반복되는 HTML
+    2. 자주 변경되는 HTML UI
+    3. 다른 페이지
+   

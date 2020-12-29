@@ -16,6 +16,7 @@ function App() {
         titleArr[0] = '여자 코트 추천';
         setTitle(titleArr);
     }
+    let [isModal, setIsModal] = useState(false);
     return (
         <div className="App">
             <div className="black-nav">
@@ -37,8 +38,32 @@ function App() {
                 <hr/>
             </div>
             <button onClick={changeTitle}> 첫번재 글 제목 변경</button>
+            <button onClick={() => {
+                // setIsModal(!modal);
+                if (isModal) {
+                    setIsModal(false);
+                } else {
+                    setIsModal(true);
+                }
+            }}> 모달창 등장
+            </button>
+            {
+                isModal
+                    ? <Modal/>
+                    : null
+            }
         </div>
     );
+}
+
+function Modal() {
+    return (
+        <div className="modal">
+            <h2>글제목</h2>
+            <p>날짜</p>
+            <p>상세내용</p>
+        </div>
+    )
 }
 
 export default App;
