@@ -46,21 +46,22 @@ function App() {
                 } else {
                     setIsModal(true);
                 }
-            }}> 모달창 등장
+            }}> 모달창 열고/닫기
             </button>
             {
                 isModal
-                    ? <Modal/>
+                    ? <Modal modalTitle={title}/>
                     : null
             }
         </div>
     );
 }
 
-function Modal() {
+function Modal(props) {
+    console.log(props)
     return (
         <div className="modal">
-            <h2>글제목</h2>
+            <h2>{props.modalTitle[1]}</h2>
             <p>날짜</p>
             <p>상세내용</p>
         </div>

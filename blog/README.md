@@ -52,6 +52,18 @@
       }
       ```
 2. Props
+    * 사용하는 이유
+        * State는 컴포넌트간의 공유가 되지 않으므로, 부모 컴포넌트에서 자식 컴포넌트로 State를 전달해야함
+    * 부모 컴포넌트에서 자식 컴포넌트로 파라미터 처럼 전달하여 사용
+      ```
+      let [test,setTest] = useState('테스트');
+      
+      <Test propsTest={test} />;
+      
+      function Test(props) {
+        return ( <div>props.propsTest</div> );
+      }
+      ```
 
 ## 3.Component
 
