@@ -9,13 +9,20 @@ function App() {
         2. 두번째 인자 : state 변경 함수
     */
     let [title, setTitle] = useState(['남자 코트 추천', '강남 고기 맛집', '글 제목 테스트01']);
+    let [like, setLike] = useState(0);
+    let changeTitle = () => {
+        let titleArr = [...title];
+        console.log(titleArr);
+        titleArr[0] = '여자 코트 추천';
+        setTitle(titleArr);
+    }
     return (
         <div className="App">
             <div className="black-nav">
                 <div>개발 블로그</div>
             </div>
             <div className="list">
-                <h3> {title[0]} </h3>
+                <h3> {title[0]} <span onClick={() => setLike(like++)}>👍</span> {like} </h3>
                 <p>2월 21일 발행</p>
                 <hr/>
             </div>
@@ -29,6 +36,7 @@ function App() {
                 <p>2월 19일 발행</p>
                 <hr/>
             </div>
+            <button onClick={changeTitle}> 첫번재 글 제목 변경</button>
         </div>
     );
 }
