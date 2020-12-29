@@ -1,2 +1,2 @@
 # react_study
-react study
+* 리엑트 스터디 정리
