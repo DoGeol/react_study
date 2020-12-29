@@ -11,12 +11,21 @@ function App() {
     let [title, setTitle] = useState(['남자 코트 추천', '강남 고기 맛집', '글 제목 테스트01']);
     let [clickTitle, setClickTitle] = useState(0);
     let [like, setLike] = useState(0);
+    let [inputData, setInputData] = useState('');
     let changeTitle = () => {
         let titleArr = [...title];
         console.log(titleArr);
         titleArr[0] = '여자 코트 추천';
         setTitle(titleArr);
     }
+
+    let insertTitle = () => {
+        let titleArr = [inputData, ...title];
+        // titleArr.unshift(inputData);
+        setTitle(titleArr);
+        setInputData('');
+    }
+
     let [isModal, setIsModal] = useState(false);
     return (
         <div className="App">
@@ -26,7 +35,7 @@ function App() {
             {
                 title.map((val, idx) => {
                     return (
-                        <div className="list">
+                        <div className="list" key={idx}>
                             <h3 onClick={() => {
                                 setIsModal(!isModal);
                                 setClickTitle(idx);
@@ -52,6 +61,13 @@ function App() {
                     ? <Modal modalTitle={title} modalTitleNum={clickTitle}/>
                     : null
             }
+            {/*<input onChange={ (e) => { setInputData(e.target.value)} }/>*/}
+            <div className="publish">
+                <input value={inputData} onChange={(e) => {
+                    setInputData(e.target.value)
+                }}/>
+                <button onClick={insertTitle}>전송</button>
+            </div>
         </div>
     );
 }
