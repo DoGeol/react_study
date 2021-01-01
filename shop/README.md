@@ -16,3 +16,28 @@
     6. Switch 훅을 사용하여 Switch 태그를 감싸면 하나의 Router만 보여줌 (중복 방지)
         * 다만 중복 될 경우 제일 위의 라우터가 보여짐
     7. useParams 훅을 사용하면 파라미터의 값을 받아 올 수 있음
+
+## 2. styled-components
+
+* class 중복을 방지하기 위한 CSS in js
+    * 장점
+        1. 파일 안에 선언으로 컴포넌트명이 겹쳐도 css 이슈가 생기지 않음
+        2. 파일 안에 관리되므로, css 수정이 필요할때 컴포넌트를 찾으면 됌
+    * 단점
+        1. css 아키텍쳐를 잘 만들 수 있으면 오히려 관리가 어려울 수 있음
+        2. 컴포넌트마다 css 선언을 해야함
+    * 사용법
+        ```
+        let 박스 = styled.div`
+            padding: 20px;
+        `;
+        
+        let 제목 = styled.h4`
+            font-size: 25px;
+            color: ${ props => props.색상 };  // 태그에서 props로 값을 전달 받을 수 있음
+        `;
+      
+        <박스>
+            <제목 색상="red">상세페이지</제목>     // props 색상 > red 전달
+        </박스>
+        ```
