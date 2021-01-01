@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Button, Jumbotron, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import './App.css';
 import Data from './data.js';
 import Detail from './Detail';
 import {Link, Route, Switch} from 'react-router-dom';
 import Axios from 'axios';
+
+export let stockContext = React.createContext();
 
 function App() {
     let [shoes, setShoes] = useState(Data);
@@ -41,21 +43,24 @@ function App() {
                         </p>
                     </Jumbotron>
                     <div className="container">
-                        <div className="row">
-                            {
-                                shoes.map((shoe) => {
-                                    return (
-                                        <Card shoe={shoe} key={shoe.id}/>
-                                    )
-                                })
-                            }
-                        </div>
+                        <stockContext.Provider value={stock}>
+                            <div className="row">
+                                {
+                                    shoes.map((shoe) => {
+                                        return (
+                                            <Card shoe={shoe} key={shoe.id}/>
+                                        )
+                                    })
+                                }
+                            </div>
+                        </stockContext.Provider>
                         <button className="btn btn-primary" onClick={() => {
                             Axios.get('https://codingapple1.github.io/shop/data2.json')
                                 .then((res) => {
                                     console.log('성공 ::: ', res);
                                     let shoesArr = [...shoes, ...res.data];
                                     setShoes(shoesArr);
+                                    setStock([...stock, 20, 11, 2]);
                                 })
                                 .catch((res) => {
                                     console.log('실패');
@@ -65,7 +70,9 @@ function App() {
                     </div>
                 </Route>
                 <Route path="/detail/:id">
-                    <Detail shoes={shoes} stock={stock} setStock={setStock}/>
+                    <stockContext.Provider value={stock}>
+                        <Detail shoes={shoes} stock={stock} setStock={setStock}/>
+                    </stockContext.Provider>
                 </Route>
                 <Route path="/:id">
                     <div>아무거나 적었을때 보여주세요.</div>
@@ -83,7 +90,15 @@ function Card(props) {
                  alt={'img' + props.shoe.id}/>
             <h4>{props.shoe.title}</h4>
             <p>{props.shoe.content} & {props.shoe.price}</p>
+            <CardStock idx={props.shoe.id}/>
         </div>
+    )
+}
+
+function CardStock(props) {
+    let stock = useContext(stockContext);
+    return (
+        <p>재고 : {stock[props.idx]}</p>
     )
 }
 

@@ -61,4 +61,22 @@
     * `useEffect(()=>{},[]);`에서 함수 끝에 매개변수를 넣을 수 있는 데, 이 부분에 빈배열을 넣을 수 있음
         * 빈 배열을 넣을 경우 최초 실행되고 이후 Update에 영향을 받지 않음
         * 배열 안에 State를 넣으면 해당 State가 업데이트 될 때만 useEffect가 실행 됌
-    
+
+## 4. Context API
+
+* 중첩 된 컴포넌트에 props를 전달할 때 유용한 API
+    * redux를 사용해도 같은 효과를 갖음
+    * react에서 공식적으로 지원하는 기능
+        ```
+        let testContext = React.createContext();
+       
+        // 1. 전달하고자 하는 컴포넌트를 태그로 감싸고, 넘기는 State를 value값에 넣어줌
+        <testContext.Provider value={State}>
+            <Component> 전달하고자 하는 컴포넌트 <Component>
+        </testContext.Provider>
+      
+        // 2. 전달받은 컴포넌트에서 useContext로 전달받아서 사용, 하위용 컴포넌트에서도 동일하게 사
+        import {useContext} from 'react';
+        let state = useContext(testContext);
+        ```
+    * 만약 js파일로 분리해서 사용한다면 Context를 export하고, js파일에 import하여 사용하면 됌

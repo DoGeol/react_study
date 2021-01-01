@@ -1,6 +1,7 @@
-import {React, useEffect, useState} from "react";
+import {React, useContext, useEffect, useState} from "react";
 import {useHistory, useParams} from 'react-router-dom';
 import styled from 'styled-components';
+import {stockContext} from "./App.js";
 
 let 박스 = styled.div`
   padding: 20px;
@@ -30,6 +31,8 @@ function Detail(props) {
     let history = useHistory();
     let product = props.shoes.find((pd) => pd.id === parseInt(id));
     let [isAlert, setIsAlert] = useState(true);
+    let stock = useContext(stockContext);
+    console.log('stock ::: ', stock);
     useEffect(() => {
         let timer = setTimeout(() => {
             setIsAlert(false);
