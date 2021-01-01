@@ -5,6 +5,7 @@ import Data from './data.js';
 import Detail from './Detail';
 import {Link, Route, Switch} from 'react-router-dom';
 import Axios from 'axios';
+import Cart from "./Cart";
 
 export let stockContext = React.createContext();
 
@@ -73,6 +74,9 @@ function App() {
                     <stockContext.Provider value={stock}>
                         <Detail shoes={shoes} stock={stock} setStock={setStock}/>
                     </stockContext.Provider>
+                </Route>
+                <Route path="/cart">
+                    <Cart/>
                 </Route>
                 <Route path="/:id">
                     <div>아무거나 적었을때 보여주세요.</div>

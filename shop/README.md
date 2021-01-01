@@ -80,3 +80,43 @@
         let state = useContext(testContext);
         ```
     * 만약 js파일로 분리해서 사용한다면 Context를 export하고, js파일에 import하여 사용하면 됌
+
+## 5. Redux
+
+1. index.js처럼 컴포넌트를 추가하는 최상위에 redux import
+    ```javascript
+    // index.js
+    import {Provider} from 'react-redux';
+    import {createStore} from "redux";
+    ```
+2. Store 생성
+    * 따로 파일에 정의해도 괜찮음
+    ```javascript
+    let store = createStore(() => {
+        return [];
+    });
+    ```
+3. Provider 태그를 사용하고자 하는 컴포넌트에 감싸고, store 매개변수로 전달
+    ```javascript
+    ReactDOM.render(
+        <React.StrictMode>
+            <BrowserRouter>
+                <Provider store={store}>
+                    <App/>
+                </Provider>
+            </BrowserRouter>
+        </React.StrictMode>,
+        document.getElementById('root')
+    );
+    ```
+4. 사용하고자 하는 파일에서 사용하기 위한 셋팅
+    1. export  
+       `export default connect(convertState)(컴포넌트);`
+    2. Store를 재할당하는 함수 생성
+        ```javascript
+        function convertState(state) { 
+            return { state: state }; 
+        }
+        ```
+    3. 컴포넌트에서 props와 동일하게 사용 가능
+    
