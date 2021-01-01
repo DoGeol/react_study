@@ -4,6 +4,7 @@ import './App.css';
 import Data from './data.js';
 import Detail from './Detail';
 import {Link, Route, Switch} from 'react-router-dom';
+import Axios from 'axios';
 
 function App() {
     let [shoes, setShoes] = useState(Data);
@@ -48,6 +49,18 @@ function App() {
                                 })
                             }
                         </div>
+                        <button className="btn btn-primary" onClick={() => {
+                            Axios.get('https://codingapple1.github.io/shop/data2.json')
+                                .then((res) => {
+                                    console.log('성공 ::: ', res);
+                                    let shoesArr = [...shoes, ...res.data];
+                                    setShoes(shoesArr);
+                                })
+                                .catch((res) => {
+                                    console.log('실패');
+                                });
+                        }}>더보기
+                        </button>
                     </div>
                 </Route>
                 <Route path="/detail/:id">
