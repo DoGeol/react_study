@@ -15,3 +15,4 @@
        `<div><Link to="/">Home</Link></div>`
     6. Switch 훅을 사용하여 Switch 태그를 감싸면 하나의 Router만 보여줌 (중복 방지)
         * 다만 중복 될 경우 제일 위의 라우터가 보여짐
+    7. useParams 훅을 사용하면 파라미터의 값을 받아 올 수 있음
