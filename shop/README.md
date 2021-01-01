@@ -58,4 +58,7 @@
         return function UnMountFunc() {};   // 컴포넌트가 Unmount 되었을 때 실행되는 코드       
     }
     ```
+    * `useEffect(()=>{},[]);`에서 함수 끝에 매개변수를 넣을 수 있는 데, 이 부분에 빈배열을 넣을 수 있음
+        * 빈 배열을 넣을 경우 최초 실행되고 이후 Update에 영향을 받지 않음
+        * 배열 안에 State를 넣으면 해당 State가 업데이트 될 때만 useEffect가 실행 됌
     

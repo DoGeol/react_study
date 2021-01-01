@@ -31,10 +31,11 @@ function Detail(props) {
     let product = props.shoes.find((pd) => pd.id === parseInt(id));
     let [isAlert, setIsAlert] = useState(true);
     useEffect(() => {
-        setTimeout(() => {
+        let timer = setTimeout(() => {
             setIsAlert(false);
         }, 3000);
-    })
+        return clearTimeout(timer);
+    }, [isAlert])
 
     return (
         <div className="container">
@@ -43,7 +44,7 @@ function Detail(props) {
             </박스>
             {
                 isAlert ?
-                    <Alert><AlertContent>재고가 얼마 남지 않았습니다.</AlertContent></Alert>
+                    (<Alert><AlertContent>재고가 얼마 남지 않았습니다.</AlertContent></Alert>)
                     : null
             }
             <div className="row">
