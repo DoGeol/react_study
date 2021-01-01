@@ -8,6 +8,7 @@ import Axios from 'axios';
 
 function App() {
     let [shoes, setShoes] = useState(Data);
+    let [stock, setStock] = useState([10, 12, 33]);
     return (
         <div className="App">
             <Navbar bg="light" expand="lg">
@@ -64,7 +65,7 @@ function App() {
                     </div>
                 </Route>
                 <Route path="/detail/:id">
-                    <Detail shoes={shoes}/>
+                    <Detail shoes={shoes} stock={stock} setStock={setStock}/>
                 </Route>
                 <Route path="/:id">
                     <div>아무거나 적었을때 보여주세요.</div>

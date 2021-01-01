@@ -55,7 +55,13 @@ function Detail(props) {
                     <h4 className="pt-5">{product.title}</h4>
                     <p>{product.content}</p>
                     <p>{product.price}</p>
-                    <button className="btn btn-danger">주문하기</button>
+                    <StockInfo stock={props.stock[parseInt(id)]}/>
+                    <button className="btn btn-danger" onClick={() => {
+                        let test = [...props.stock];
+                        test[parseInt(id)]--;
+                        props.setStock(test);
+                    }}>주문하기
+                    </button>
                     <button className="btn btn-danger" onClick={() => {
                         // history.goBack();
                         history.push('/');
@@ -65,6 +71,12 @@ function Detail(props) {
             </div>
         </div>
     )
+}
+
+function StockInfo(props) {
+    return (
+        <p>재고 : {props.stock}</p>
+    );
 }
 
 export default Detail;
