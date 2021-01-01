@@ -1,4 +1,4 @@
-import React from "react";
+import {React, useEffect, useState} from "react";
 import {useHistory, useParams} from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -11,16 +11,41 @@ let 제목 = styled.h4`
   color: ${props => props.색상};
 `;
 
+let Alert = styled.div`
+  background: #eeeeee;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+`;
+
+let AlertContent = styled.p`
+  margin-bottom: 0;
+`;
+
 function Detail(props) {
     let {id} = useParams();
     let imgUrl = `https://codingapple1.github.io/shop/shoes${parseInt(id) + 1}.jpg`
     let history = useHistory();
     let product = props.shoes.find((pd) => pd.id === parseInt(id));
+    let [isAlert, setIsAlert] = useState(true);
+    useEffect(() => {
+        setTimeout(() => {
+            setIsAlert(false);
+        }, 3000);
+    })
+
     return (
         <div className="container">
             <박스>
                 <제목 색상="red">상세페이지</제목>
             </박스>
+            {
+                isAlert ?
+                    <Alert><AlertContent>재고가 얼마 남지 않았습니다.</AlertContent></Alert>
+                    : null
+            }
             <div className="row">
                 <div className="col-md-6">
                     <img src={imgUrl} width="100%"/>

@@ -41,3 +41,21 @@
             <제목 색상="red">상세페이지</제목>     // props 색상 > red 전달
         </박스>
         ```
+
+## 3. Lifecycle
+
+* class 방식
+    ```
+    class Lifecycle extends React.Component {
+        componentDidMount() {};             // 컴포넌트가 Mount 되었을 때 실행되는 코드 (ex. Ajax)
+        componentWillUnMount() {};          // 컴포넌트가 Unmount 되었을 때 실행되는 코드
+    }
+    ```
+* function 방식
+    ```
+    function Lifecycle() {
+        useEffect( () => {} );              // 컴포넌트가 Mount, Update 되었을 때 실행되는 코드
+        return function UnMountFunc() {};   // 컴포넌트가 Unmount 되었을 때 실행되는 코드       
+    }
+    ```
+    
