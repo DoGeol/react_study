@@ -1,4 +1,5 @@
 import {React, useContext, useEffect, useState} from "react";
+import {Nav} from 'react-bootstrap';
 import {useHistory, useParams} from 'react-router-dom';
 import styled from 'styled-components';
 import {stockContext} from "./App.js";
@@ -40,6 +41,8 @@ function Detail(props) {
         return clearTimeout(timer);
     }, [isAlert])
 
+    let [tab, setTab] = useState(0);
+
     return (
         <div className="container">
             <박스>
@@ -72,8 +75,31 @@ function Detail(props) {
                     </button>
                 </div>
             </div>
+            <Nav className="mt-5" variant="tabs" defaultActiveKey="link-0">
+                <Nav.Item>
+                    <Nav.Link eventKey="link-0" onClick={() => {
+                        setTab(0)
+                    }}>Active</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                    <Nav.Link eventKey="link-1" onClick={() => {
+                        setTab(1)
+                    }}>Option 2</Nav.Link>
+                </Nav.Item>
+            </Nav>
+            <TabContent selectTab={tab}/>
         </div>
     )
+}
+
+function TabContent(props) {
+    if (props.selectTab === 0) {
+        return <div>0번째 내용입니다.</div>
+    } else if (props.selectTab === 1) {
+        return <div>1번째 내용입니다.</div>
+    } else if (props.selectTab === 2) {
+        return <div>2번째 내용입니다.</div>
+    }
 }
 
 function StockInfo(props) {
