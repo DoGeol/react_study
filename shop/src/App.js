@@ -3,7 +3,7 @@ import {Button, Jumbotron, Nav, Navbar, NavDropdown} from 'react-bootstrap';
 import './App.css';
 import Data from './data.js';
 import Detail from './Detail';
-import {Link, Route, Switch} from 'react-router-dom';
+import {Link, Route, Switch, useHistory} from 'react-router-dom';
 import Axios from 'axios';
 import Cart from "./Cart";
 
@@ -87,8 +87,11 @@ function App() {
 }
 
 function Card(props) {
+    let history = useHistory();
     return (
-        <div className="col-md-4">
+        <div className="col-md-4" onClick={() => {
+            history.push('/detail/' + props.shoe.id)
+        }}>
             <img src={'https://codingapple1.github.io/shop/shoes' + (props.shoe.id + 1) + '.jpg'}
                  width="100%"
                  alt={'img' + props.shoe.id}/>
