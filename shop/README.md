@@ -129,8 +129,10 @@
     5. Reducer 사용
         ```javascript            
         // index.js
+        // state 초기값 생성
+        let defState = []
         // reducer 생성 
-        function reducer(state, action) {
+        function reducer(state = defState, action) {
             // state    : 전역 관리되는 State 
             // action   : 컴포넌트에서 전달 받는 변수
             return state;
