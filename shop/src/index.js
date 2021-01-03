@@ -4,9 +4,57 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import {BrowserRouter} from "react-router-dom";
+import {Provider} from 'react-redux';
+import {combineReducers, createStore} from "redux";
+
+// let store = createStore(() => {
+//     return [{id: 0, name: '멋진 신발', quantity: 1}
+//         , {id: 1, name: '멋진 옷', quantity: 2}
+//         , {id: 2, name: '멋진 장갑', quantity: 3}
+//         , {id: 3, name: '멋진 모자', quantity: 4}];
+// });
+
+let defState = [
+    {id: 0, name: '멋진 신발', quantity: 1}
+    , {id: 1, name: '멋진 옷', quantity: 2}
+    , {id: 2, name: '멋진 장갑', quantity: 3}
+    , {id: 3, name: '멋진 모자', quantity: 4}
+];
+
+function reducer(state = defState, action) {
+    const {id, type} = action;
+    if (type === 'addCart') {
+        return [...state, action.payload];
+    }
+    if (type === 'increase') {
+        let copyState = [...state];
+        copyState[id].quantity++;
+        return copyState;
+    } else if (type === 'decrease') {
+        let copyState = [...state];
+        if (copyState[id].quantity > 0) {
+            copyState[id].quantity--;
+        }
+        return copyState;
+    } else {
+        return state
+    }
+}
+
+function alertReducer(state = true, action) {
+    return action.type === true ? !state : state
+}
+
+let store = createStore(combineReducers({reducer, alertReducer}));
+
 ReactDOM.render(
     <React.StrictMode>
-        <App/>
+        <BrowserRouter>
+            <Provider store={store}>
+                <App/>
+            </Provider>
+        </BrowserRouter>
     </React.StrictMode>,
     document.getElementById('root')
 );
