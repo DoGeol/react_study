@@ -15,17 +15,21 @@ import {combineReducers, createStore} from "redux";
 //         , {id: 3, name: '멋진 모자', quantity: 4}];
 // });
 
-let defState = [
-    {id: 0, name: '멋진 신발', quantity: 1}
-    , {id: 1, name: '멋진 옷', quantity: 2}
-    , {id: 2, name: '멋진 장갑', quantity: 3}
-    , {id: 3, name: '멋진 모자', quantity: 4}
-];
+let defState = [];
 
 function reducer(state = defState, action) {
     const {id, type} = action;
     if (type === 'addCart') {
-        return [...state, action.payload];
+        let found = state.findIndex((val) => {
+            return val.id === action.payload.id
+        })
+        if (found >= 0) {
+            let copy = [...state];
+            copy[found].quantity++;
+            return copy;
+        } else {
+            return [...state, action.payload];
+        }
     }
     if (type === 'increase') {
         let copyState = [...state];
