@@ -155,3 +155,26 @@
           }; 
       }
       ```
+
+## 6. Lazy Loading
+
+* import에서 js를 불러올 때 갯수가 많아지면 로딩에 시간이 오래 걸릴 수 있음.  
+  이때, Lazy Loading을 사용하여 import를 사용 할 때 넣을 수 있음
+    ```javascript
+    import React, {lazy, Suspense} from 'react';
+    
+    /* 1. import 컴포넌트.js lazy로 감싸기 */
+    // import Detail from './Detail';
+    let Detail = lazy(() => {
+        return import('./Detail.js')
+    });
+    
+    /* 2. Suspense 태그로 적용할 컴포넌트 감싸기 */
+    <Route path="/detail/:id">
+        <stockContext.Provider value={stock}>
+            <Suspense fallback={<div>로딩중이에요.</div>}>
+                <Detail shoes={shoes} stock={stock} setStock={setStock}/>
+            </Suspense>
+        </stockContext.Provider>
+    </Route>
+    ```
