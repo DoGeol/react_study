@@ -24,6 +24,9 @@ let defState = [
 
 function reducer(state = defState, action) {
     const {id, type} = action;
+    if (type === 'addCart') {
+        return [...state, action.payload];
+    }
     if (type === 'increase') {
         let copyState = [...state];
         copyState[id].quantity++;

@@ -3,6 +3,7 @@ import {Nav} from 'react-bootstrap';
 import {useHistory, useParams} from 'react-router-dom';
 import styled from 'styled-components';
 import {stockContext} from "./App.js";
+import {connect} from "react-redux";
 
 let 박스 = styled.div`
   padding: 20px;
@@ -33,7 +34,6 @@ function Detail(props) {
     let product = props.shoes.find((pd) => pd.id === parseInt(id));
     let [isAlert, setIsAlert] = useState(true);
     let stock = useContext(stockContext);
-    console.log('stock ::: ', stock);
     useEffect(() => {
         let timer = setTimeout(() => {
             setIsAlert(false);
@@ -66,6 +66,8 @@ function Detail(props) {
                         let test = [...props.stock];
                         test[parseInt(id)]--;
                         props.setStock(test);
+                        props.dispatch({type: 'addCart', payload: {id: product.id, name: product.title, quantity: 1}});
+                        history.push('/cart');
                     }}>주문하기
                     </button>
                     <button className="btn btn-danger" onClick={() => {
@@ -108,4 +110,13 @@ function StockInfo(props) {
     );
 }
 
-export default Detail;
+function getState(state) {
+    return {
+        state: state.reducer,
+        isAlert: state.alertReducer
+    }
+}
+
+export default connect(getState)(Detail);
+
+// export default Detail;
