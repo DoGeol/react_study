@@ -11,6 +11,7 @@ function Cart(props) {
                     <th>#</th>
                     <th>상품명</th>
                     <th>수량</th>
+                    <th>변</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -21,6 +22,16 @@ function Cart(props) {
                                 <td>{val.id + 1}</td>
                                 <td>{val.name}</td>
                                 <td>{val.quantity}</td>
+                                <td>
+                                    <button onClick={() => {
+                                        props.dispatch({type: 'decrease', id: val.id})
+                                    }}>-
+                                    </button>
+                                    <button onClick={() => {
+                                        props.dispatch({type: 'increase', id: val.id})
+                                    }}>+
+                                    </button>
+                                </td>
                             </tr>
                         )
                     })

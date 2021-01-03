@@ -83,40 +83,63 @@
 
 ## 5. Redux
 
-1. index.js처럼 컴포넌트를 추가하는 최상위에 redux import
-    ```javascript
-    // index.js
-    import {Provider} from 'react-redux';
-    import {createStore} from "redux";
-    ```
-2. Store 생성
-    * 따로 파일에 정의해도 괜찮음
-    ```javascript
-    let store = createStore(() => {
-        return [];
-    });
-    ```
-3. Provider 태그를 사용하고자 하는 컴포넌트에 감싸고, store 매개변수로 전달
-    ```javascript
-    ReactDOM.render(
-        <React.StrictMode>
-            <BrowserRouter>
-                <Provider store={store}>
-                    <App/>
-                </Provider>
-            </BrowserRouter>
-        </React.StrictMode>,
-        document.getElementById('root')
-    );
-    ```
-4. 사용하고자 하는 파일에서 사용하기 위한 셋팅
-    1. export  
-       `export default connect(convertState)(컴포넌트);`
-    2. Store를 재할당하는 함수 생성
+* 사용하는 이유
+    * Props 전달 용이
+    * State 관리 용이  
+      Reducer를 선언하여 State 관리를 하기 때문에, 프로젝트 규모가 커질수록 관리하기 용이
+
+
+* 사용 방법
+    1. index.js처럼 컴포넌트를 추가하는 최상위에 redux import
         ```javascript
-        function convertState(state) { 
-            return { state: state }; 
-        }
+        // index.js
+        import {Provider} from 'react-redux';
+        import {createStore} from "redux";
         ```
-    3. 컴포넌트에서 props와 동일하게 사용 가능
-    
+    2. Store 생성
+        * 따로 파일에 정의해도 괜찮음
+        ```javascript
+        let store = createStore(() => {
+            return [];
+        });
+        ```
+    3. Provider 태그를 사용하고자 하는 컴포넌트에 감싸고, store 매개변수로 전달
+        ```javascript
+        ReactDOM.render(
+            <React.StrictMode>
+                <BrowserRouter>
+                    <Provider store={store}>
+                        <App/>
+                    </Provider>
+                </BrowserRouter>
+            </React.StrictMode>,
+            document.getElementById('root')
+        );
+        ```
+    4. 사용하고자 하는 파일에서 사용하기 위한 셋팅
+        1. export  
+           `export default connect(convertState)(컴포넌트);`
+        2. Store를 재할당하는 함수 생성
+            ```javascript
+            function convertState(state) { 
+                return { state: state }; 
+            }
+            ```
+        3. 컴포넌트에서 props와 동일하게 사용 가능
+    5. Reducer 사용
+        ```javascript            
+        // index.js
+        // reducer 생성 
+        function reducer(state, action) {
+            // state    : 전역 관리되는 State 
+            // action   : 컴포넌트에서 전달 받는 변수
+            return state;
+        }
+        
+       // store에 reducer 주입
+        let store = createStore(reducer);
+       
+        // component.js
+        <button onClick={ () => { props.dispatch( { type : 'action.type' } ) }}>-</button>
+        ```
+       

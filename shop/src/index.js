@@ -8,12 +8,38 @@ import {BrowserRouter} from "react-router-dom";
 import {Provider} from 'react-redux';
 import {createStore} from "redux";
 
-let store = createStore(() => {
-    return [{id: 0, name: '멋진 신발', quantity: 1}
-        , {id: 1, name: '멋진 옷', quantity: 2}
-        , {id: 2, name: '멋진 장갑', quantity: 3}
-        , {id: 3, name: '멋진 모자', quantity: 4}];
-});
+// let store = createStore(() => {
+//     return [{id: 0, name: '멋진 신발', quantity: 1}
+//         , {id: 1, name: '멋진 옷', quantity: 2}
+//         , {id: 2, name: '멋진 장갑', quantity: 3}
+//         , {id: 3, name: '멋진 모자', quantity: 4}];
+// });
+
+let defState = [
+    {id: 0, name: '멋진 신발', quantity: 1}
+    , {id: 1, name: '멋진 옷', quantity: 2}
+    , {id: 2, name: '멋진 장갑', quantity: 3}
+    , {id: 3, name: '멋진 모자', quantity: 4}
+];
+
+function reducer(state = defState, action) {
+    const {id, type} = action;
+    if (type === 'increase') {
+        let copyState = [...state];
+        copyState[id].quantity++;
+        return copyState;
+    } else if (type === 'decrease') {
+        let copyState = [...state];
+        if (copyState[id].quantity > 0) {
+            copyState[id].quantity--;
+        }
+        return copyState;
+    } else {
+        return state
+    }
+}
+
+let store = createStore(reducer);
 
 ReactDOM.render(
     <React.StrictMode>
