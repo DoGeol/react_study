@@ -144,4 +144,14 @@
         // component.js
         <button onClick={ () => { props.dispatch( { type : 'action.type' } ) }}>-</button>
         ```
-       
+  6. Reducer combine 사용
+      ```javascript
+      let store = createStore(combineReducers({reducer, reducer2}));
+      // combine 사용 시, 사용되는 컴포넌트에 Store 재할당 함수 수정 필요
+      function convertState(state) { 
+          return { 
+              state: state.reducer,
+              state2: state.reducer2
+          }; 
+      }
+      ```

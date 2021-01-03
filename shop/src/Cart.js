@@ -1,6 +1,20 @@
 import React from 'react';
 import {Table} from 'react-bootstrap';
 import {connect} from "react-redux";
+import styled from "styled-components";
+
+let Alert = styled.div`
+  background: #f6e7bc;
+  padding: 15px;
+  border-radius: 5px;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+`;
+
+let AlertContent = styled.p`
+  margin-bottom: 0;
+`;
 
 function Cart(props) {
     return (
@@ -38,13 +52,27 @@ function Cart(props) {
                 }
                 </tbody>
             </Table>
+            {
+                props.isAlert
+                    ? (
+                        <Alert>
+                            <AlertContent>지금 구매하시면 신규할인 20%</AlertContent>
+                            <button onClick={() => {
+                                props.dispatch({type: props.isAlert})
+                            }}>닫기
+                            </button>
+                        </Alert>
+                    )
+                    : null
+            }
         </div>
     )
 }
 
 function getState(state) {
     return {
-        state: state
+        state: state.reducer,
+        isAlert: state.alertReducer
     }
 }
 
